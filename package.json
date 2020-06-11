@@ -1,0 +1,29 @@
+{
+  "name": "e-luminous-api",
+  "version": "1.0.0",
+  "description": "An Intelligent e-Scientific Lab room assistant for college student's to get the analytical results and accuracy of each observation.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-Luminous/node-api.git"
+  },
+  "keywords": [
+    "e-Luminous",
+    "api"
+  ],
+  "author": "@TeamTigers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-Luminous/node-api/issues"
+  },
+  "homepage": "https://github.com/e-Luminous/node-api#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
