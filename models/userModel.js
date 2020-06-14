@@ -1,7 +1,8 @@
 let mongoose = require('mongoose');
 let validator = require('validator');
+let bcrypt = require('bcryptjs');
 
-let userSchema = new mongoose.Schema = {
+let userSchema = new mongoose.Schema ({
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -36,13 +37,29 @@ let userSchema = new mongoose.Schema = {
     enum: ['student', 'instructor', 'moderator', 'admin'],
     default: 'admin'
   }
-}
+});
 
-// dpcument middleware
+/***** Document middleware******/
+
+// Password hash with bcrypt
+userSchema.pre('save', async function(next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password')) return next();
+
+  // Hash the password with cost of 12
+  this.password = await bcrypt.hash(this.password, 12);
+  
+  // Delete passwordConfirm field
+  this.passwordConfirm = undefined;
+  next();
+});
+
+// get User from email
 userSchema.pre('save', function(next) {
   this.userName = this.email.match(/^([^@]*)@/)[1];
   next();
 });
 
+let User = mongoose.model('User', userSchema);
 // Export User model
-module.exports = mongoose.model('User', userSchema);
+module.exports = User;
